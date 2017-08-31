@@ -5,6 +5,7 @@
 
 require 'rexle'
 require 'rexle-builder'
+require 'polyrex-schema'
 
 
 class PolyrexBuilder
@@ -25,7 +26,12 @@ class PolyrexBuilder
   end
 
   def to_xml()  
-    Rexle.new(@a).xml pretty: true    
+    
+    doc = Rexle.new(@a)
+    schema = PolyrexSchema.new.parse(doc.root.xml).to_schema    
+    doc.root.element('summary').add Rexle::Element.new('schema').add_text(schema)
+    
+    doc.xml pretty: true    
   end
 
   private
@@ -37,16 +43,20 @@ class PolyrexBuilder
     raw_records = a
     raw_summary = raw_records.first
 
+    h = raw_records.first    
+    summary = h.merge({schema: "%s[%s]" % [name, h.keys.join(', ')]})
+    
     record = if raw_records[1] then
+    
 
       {
-        summary: raw_records.first, 
+        summary: summary, 
         records: raw_records[1].map{|x| pxify(x,parents.clone) }
       }
 
     else
 
-      {summary: raw_records.first}
+      {summary: summary}
 
     end
 
