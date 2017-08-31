@@ -32,7 +32,7 @@ class PolyrexBuilder
 
   def pxify(a, parents=[])
 
-    name = parents.shift
+    name = parents.length <= 1 ? parents.first : parents.shift
 
     raw_records = a
     raw_summary = raw_records.first
