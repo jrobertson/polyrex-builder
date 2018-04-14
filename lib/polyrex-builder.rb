@@ -10,14 +10,16 @@ require 'polyrex-schema'
 
 class PolyrexBuilder
 
-  def initialize(rows=[], parents: [], summary: {}, rootname: 'items')
+  def initialize(rows=[], parents: [], summary: {}, 
+                 rootname: 'items', debug: false)
 
+    @debug = debug
     records = rows.map {|x|  pxify(x, parents) }
     
     summary.merge!({recordx_type: 'polyrex'})
     h = {rootname.to_sym => {summary: summary, records: records }}
 
-    @a = RexleBuilder.new(h).to_a[3]
+    @a = RexleBuilder.new(h).to_a
 
   end
   

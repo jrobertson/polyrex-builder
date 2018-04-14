@@ -1,12 +1,10 @@
 Gem::Specification.new do |s|
   s.name = 'polyrex-builder'
-  s.version = '0.2.0'
+  s.version = '0.3.0'
   s.summary = 'Builds a Polyrex structure from an array of Hash objects representing summary records.'
   s.authors = ['James Robertson']
   s.files = Dir['lib/polyrex-builder.rb']
-  s.add_runtime_dependency('rexle', '~> 1.4', '>=1.4.7')
-  s.add_runtime_dependency('rexle-builder', '~> 0.3', '>=0.3.7')
-  s.add_runtime_dependency('polyrex-schema', '~> 0.4', '>=0.4.2')    
+  s.add_runtime_dependency('polyrex-schema', '~> 0.5', '>=0.5.1')    
   s.signing_key = '../privatekeys/polyrex-builder.pem'
   s.cert_chain  = ['gem-public_cert.pem']
   s.license = 'MIT'
