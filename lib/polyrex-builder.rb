@@ -19,7 +19,7 @@ class PolyrexBuilder
     summary.merge!({recordx_type: 'polyrex'})
     h = {rootname.to_sym => {summary: summary, records: records }}
 
-    @a = RexleBuilder.new(h).to_a
+    @a = RexleBuilder.new(h, debug: false).to_a
 
   end
   
